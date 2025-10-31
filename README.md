@@ -53,7 +53,6 @@ bootstrap_genre_analysis/
 - `bootstrap_means.py`: Bootstrap for genre means
 - `bootstrap_differences.py`: Bootstrap for genre differences
 - `confidence_intervals.py`: CI calculation and interpretation
-- `statistical_tests.py`: Significance testing utilities
 
 ### Module 3: Visualization (`src/visualization/`)
 **Responsibility**: Creating informative plots and figures
@@ -77,7 +76,6 @@ bootstrap_genre_analysis/
 
 **Key Files**:
 - `generate_tables.py`: Summary table generation
-- `compile_results.py`: Result aggregation
 
 ## Collaboration Strategy
 
