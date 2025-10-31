@@ -116,7 +116,22 @@ Visualization functions should accept:
 
 ## Testing and Validation
 
+### Running Tests
+All modules should have comprehensive tests. Run tests before committing:
+
+```bash
+# Run all tests (recommended for Windows)
+python -m pytest tests/
+
+# Run with coverage
+python -m pytest tests/ --cov=src --cov-report=html
+```
+
+**Note**: Use `python -m pytest` instead of `pytest` on Windows/PowerShell if the command is not recognized.
+
 ### Person 1 (Data Preprocessing)
+- **Automated Testing**: Run `pytest tests/test_data_preprocessing.py`
+- **Manual Testing**: Run preprocessing pipeline: `python scripts/run_preprocessing.py`
 - Verify data types and ranges
 - Check for missing values
 - Validate log transformations

@@ -15,10 +15,10 @@
 ## 📋 Tasks
 
 ### Phase 1: Data Preprocessing (START NOW)
-- [ ] Test and run data preprocessing pipeline with `vgsales.csv`
-- [ ] Clean data (remove invalid entries, filter time window 1995-2016, select 2-3 genres)
-- [ ] Apply log transformations and reshape for each region
-- [ ] Save cleaned data to `data/processed/` (e.g., `cleaned_data_global_1995-2016.csv`)
+- [x] Test and run data preprocessing pipeline with `vgsales.csv`
+- [x] Clean data (remove invalid entries, filter time window 1995-2016, select 2-3 genres)
+- [x] Apply log transformations and reshape for each region
+- [x] Save cleaned data to `data/processed/` (e.g., `cleaned_data_global_1995-2016.csv`)
 
 ### Phase 2: Wait for Person 2
 - [ ] Wait for bootstrap analysis results in `results/tables/`
@@ -30,11 +30,33 @@
 
 ## 📝 Current Priority
 
-**Start Phase 1 immediately** - Test data preprocessing pipeline
+**Phase 1 Complete!** ✅
+- Data preprocessing pipeline successfully run
+- 5 cleaned data files saved to `data/processed/`
+- Selected genres: Action (3167), Role-Playing (1422), Simulation (835)
+- Time window: 1995-2016 (15,835 total rows → 5,424 after genre filtering)
+
+**Next: Wait for Person 2** - Bootstrap analysis using cleaned data
 
 ## 🔗 References
 
 - `docs/COLLABORATION.md`: Interface specifications
 - `docs/MODULES.md`: Module documentation
 - `README.md`: Project overview
+- `scripts/README.md`: Script documentation and usage
+
+## 📝 Scripts
+
+- **Data Preprocessing**: `scripts/run_preprocessing.py`
+  - Run from project root: `python scripts/run_preprocessing.py`
+  - See `scripts/README.md` for detailed usage instructions
+
+## ✅ Testing
+
+- **Test Suite**: `tests/test_data_preprocessing.py`
+  - Run all tests: `python -m pytest tests/`
+  - Run specific tests: `python -m pytest tests/test_data_preprocessing.py`
+  - All 19 tests passing ✅
+  - See `tests/README.md` for testing documentation
+  - **Note**: Use `python -m pytest` on Windows/PowerShell
 

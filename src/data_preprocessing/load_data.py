@@ -29,8 +29,18 @@ def load_raw_data(filepath: str) -> pd.DataFrame:
         raise FileNotFoundError(f"Data file not found: {filepath}")
     
     try:
-        df = pd.read_csv(filepath)
+        df = pd.read_csv(filepath, encoding='utf-8')
         return df
+    except UnicodeDecodeError:
+        # Try alternative encodings if UTF-8 fails
+        for encoding in ['latin-1', 'cp1252', 'iso-8859-1']:
+            try:
+                df = pd.read_csv(filepath, encoding=encoding)
+                print(f"Successfully loaded with encoding: {encoding}")
+                return df
+            except (UnicodeDecodeError, Exception):
+                continue
+        raise ValueError("Could not decode CSV file with any supported encoding")
     except Exception as e:
         raise ValueError(f"Error reading CSV file: {e}")
 

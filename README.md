@@ -16,6 +16,13 @@ bootstrap_genre_analysis/
 │   ├── bootstrap_analysis/  # Bootstrap resampling functions
 │   ├── visualization/       # Plotting and visualization
 │   └── reporting/           # Report generation utilities
+├── tests/                   # Test suite
+│   ├── test_data_preprocessing.py  # Tests for data preprocessing
+│   ├── conftest.py          # Shared pytest fixtures
+│   └── README.md            # Test documentation
+├── scripts/                 # Executable pipeline scripts
+│   ├── run_preprocessing.py # Data preprocessing pipeline
+│   └── README.md            # Script documentation
 ├── notebooks/               # Jupyter notebooks for analysis
 ├── results/                 # Output results
 │   ├── figures/            # Generated plots and figures
@@ -116,11 +123,32 @@ pip install pandas numpy matplotlib seaborn scipy jupyter
 ```
 
 ### Setup
-1. Place raw data files in `data/raw/` (e.g., `vgsales.csv`)
-2. Run data preprocessing: `python src/data_preprocessing/load_data.py`
-3. Run bootstrap analysis: See notebooks in `notebooks/`
-4. Generate visualizations: See visualization module
-5. Compile report: See reporting module
+1. Install dependencies: `pip install -r requirements.txt`
+2. Place raw data files in `data/raw/` (e.g., `vgsales.csv`)
+3. Run tests: `pytest tests/` (optional, but recommended)
+4. Run data preprocessing: `python scripts/run_preprocessing.py`
+5. Run bootstrap analysis: See `scripts/` for analysis scripts (Person 2)
+6. Generate visualizations: See `scripts/` for visualization scripts (Person 1)
+7. Compile report: See reporting module
+
+### Testing
+
+Run the test suite to verify all modules work correctly:
+
+```bash
+# Run all tests (recommended for Windows/PowerShell)
+python -m pytest tests/
+
+# Run with coverage report
+python -m pytest tests/ --cov=src --cov-report=html
+
+# Run specific test module
+python -m pytest tests/test_data_preprocessing.py
+```
+
+**Note**: On Windows/PowerShell, use `python -m pytest` instead of `pytest` if the command is not recognized.
+
+See `tests/README.md` for detailed testing documentation.
 
 ## Key Parameters
 
