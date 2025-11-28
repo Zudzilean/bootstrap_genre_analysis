@@ -32,28 +32,24 @@ def bootstrap_mean(data: np.ndarray,
     Returns:
         Array of bootstrap means (length n_iterations)
     
-    TODO (Person 2):
-    - [ ] Add input validation (check if data is empty, n_iterations > 0, etc.)
-    - [ ] Add progress tracking for large iterations (optional)
-    - [ ] Test with edge cases (small samples, single value, etc.)
-    - [ ] Consider vectorization for performance optimization if needed
+    Raises:
+        ValueError: If data is empty or n_iterations is not positive
     """
-    # TODO (Person 2): Add input validation
-    # if len(data) == 0:
-    #     raise ValueError("Data array cannot be empty")
-    # if n_iterations <= 0:
-    #     raise ValueError("n_iterations must be positive")
+    # Input validation
+    if len(data) == 0:
+        raise ValueError("Data array cannot be empty")
+    if n_iterations <= 0:
+        raise ValueError("n_iterations must be positive")
     
-    if random_seed is not None:
-        np.random.seed(random_seed)
-    
+    # Use modern numpy random number generator
+    rng = np.random.default_rng(random_seed)
     n = len(data)
-    bootstrap_means = np.zeros(n_iterations)
+    bootstrap_means = np.empty(n_iterations)
     
     for i in range(n_iterations):
         # Resample with replacement
-        bootstrap_sample = np.random.choice(data, size=n, replace=True)
-        bootstrap_means[i] = np.mean(bootstrap_sample)
+        sample = rng.choice(data, size=n, replace=True)
+        bootstrap_means[i] = sample.mean()
     
     return bootstrap_means
 

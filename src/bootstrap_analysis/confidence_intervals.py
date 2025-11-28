@@ -31,26 +31,20 @@ def percentile_ci(bootstrap_stats: np.ndarray,
     Returns:
         Tuple of (lower_bound, upper_bound)
     
-    TODO (Person 2):
-    - [ ] Add input validation (check confidence_level is in (0, 1), etc.)
-    - [ ] Verify percentile calculation is correct
-    - [ ] Consider implementing BCa method as an alternative (more accurate but complex)
-    - [ ] Test with small bootstrap samples (edge case)
+    Raises:
+        ValueError: If confidence_level is not in (0, 1) or bootstrap_stats is empty
     """
-    # TODO (Person 2): Add input validation
-    # if not 0 < confidence_level < 1:
-    #     raise ValueError("confidence_level must be between 0 and 1")
-    # if len(bootstrap_stats) == 0:
-    #     raise ValueError("bootstrap_stats array cannot be empty")
+    # Input validation
+    if not 0 < confidence_level < 1:
+        raise ValueError("confidence_level must be between 0 and 1")
+    if len(bootstrap_stats) == 0:
+        raise ValueError("bootstrap_stats array cannot be empty")
     
     alpha = 1 - confidence_level
-    lower_percentile = (alpha / 2) * 100
-    upper_percentile = (1 - alpha / 2) * 100
+    lower_bound = np.percentile(bootstrap_stats, 100 * (alpha / 2))
+    upper_bound = np.percentile(bootstrap_stats, 100 * (1 - alpha / 2))
     
-    ci_lower = np.percentile(bootstrap_stats, lower_percentile)
-    ci_upper = np.percentile(bootstrap_stats, upper_percentile)
-    
-    return ci_lower, ci_upper
+    return lower_bound, upper_bound
 
 
 def is_significant(ci_lower: float, ci_upper: float, 

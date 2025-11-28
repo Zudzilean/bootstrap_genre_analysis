@@ -41,33 +41,28 @@ def bootstrap_difference(data_A: np.ndarray,
     Returns:
         Array of bootstrap differences (mean_A - mean_B)
     
-    TODO (Person 2):
-    - [ ] Add input validation (check if arrays are empty, etc.)
-    - [ ] Verify that resampling is truly independent (current implementation looks correct)
-    - [ ] Test with edge cases (one group has only 1 observation, etc.)
-    - [ ] Consider performance optimization if needed
+    Raises:
+        ValueError: If either data array is empty or n_iterations is not positive
     """
-    # TODO (Person 2): Add input validation
-    # if len(data_A) == 0 or len(data_B) == 0:
-    #     raise ValueError("Both data arrays must be non-empty")
+    # Input validation
+    if len(data_A) == 0 or len(data_B) == 0:
+        raise ValueError("Both data arrays must be non-empty")
+    if n_iterations <= 0:
+        raise ValueError("n_iterations must be positive")
     
-    if random_seed is not None:
-        np.random.seed(random_seed)
-    
+    # Use modern numpy random number generator
+    rng = np.random.default_rng(random_seed)
     n_A = len(data_A)
     n_B = len(data_B)
-    bootstrap_differences = np.zeros(n_iterations)
+    bootstrap_diffs = np.empty(n_iterations)
     
     for i in range(n_iterations):
         # Resample independently from each group
-        bootstrap_sample_A = np.random.choice(data_A, size=n_A, replace=True)
-        bootstrap_sample_B = np.random.choice(data_B, size=n_B, replace=True)
-        
-        mean_A = np.mean(bootstrap_sample_A)
-        mean_B = np.mean(bootstrap_sample_B)
-        bootstrap_differences[i] = mean_A - mean_B
+        sample_A = rng.choice(data_A, size=n_A, replace=True)
+        sample_B = rng.choice(data_B, size=n_B, replace=True)
+        bootstrap_diffs[i] = sample_A.mean() - sample_B.mean()
     
-    return bootstrap_differences
+    return bootstrap_diffs
 
 
 def bootstrap_genre_difference(data: pd.DataFrame, 
