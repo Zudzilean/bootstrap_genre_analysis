@@ -5,6 +5,7 @@ This module provides functions for visualizing bootstrap distributions.
 """
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
@@ -32,7 +33,16 @@ def plot_bootstrap_distribution(bootstrap_stats: np.ndarray,
         title: Plot title
         save_path: Path to save figure (optional)
         xlabel: Label for x-axis
+    
+    Raises:
+        ValueError: If bootstrap_stats is empty or invalid
     """
+    # Input validation
+    if len(bootstrap_stats) == 0:
+        raise ValueError("bootstrap_stats cannot be empty")
+    if ci_bounds is not None and len(ci_bounds) != 2:
+        raise ValueError("ci_bounds must be a tuple of (lower, upper)")
+    
     fig, ax = plt.subplots(figsize=(10, 6))
     
     # Plot histogram
@@ -67,7 +77,11 @@ def plot_bootstrap_distribution(bootstrap_stats: np.ndarray,
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Figure saved to: {save_path}")
     
-    plt.show()
+    # Only show if not in non-interactive backend (e.g., during testing)
+    if matplotlib.get_backend() != 'Agg':
+        plt.show()
+    else:
+        plt.close()
 
 
 def plot_genre_means_by_region(results: Dict[str, Dict], 
@@ -76,10 +90,17 @@ def plot_genre_means_by_region(results: Dict[str, Dict],
     Plot bootstrap means for multiple genres across regions.
     
     Args:
-        results: Dictionary of results keyed by (genre, region) tuple
+        results: Dictionary of results keyed by (genre, region) tuple or string
                  Each value should be a dict with 'mean', 'bootstrap_means', etc.
         save_path: Path to save figure
+    
+    Raises:
+        ValueError: If results is empty or missing required keys
     """
+    # Input validation
+    if not results:
+        raise ValueError("results dictionary cannot be empty")
+    
     # Convert results to DataFrame for easier plotting
     plot_data = []
     for key, result in results.items():
@@ -132,5 +153,9 @@ def plot_genre_means_by_region(results: Dict[str, Dict],
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Figure saved to: {save_path}")
     
-    plt.show()
+    # Only show if not in non-interactive backend (e.g., during testing)
+    if matplotlib.get_backend() != 'Agg':
+        plt.show()
+    else:
+        plt.close()
 

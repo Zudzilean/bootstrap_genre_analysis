@@ -18,6 +18,8 @@ bootstrap_genre_analysis/
 │   └── reporting/           # Report generation utilities
 ├── tests/                   # Test suite
 │   ├── test_data_preprocessing.py  # Tests for data preprocessing
+│   ├── test_bootstrap_analysis.py # Tests for bootstrap analysis
+│   ├── test_visualization.py      # Tests for visualization functions
 │   ├── conftest.py          # Shared pytest fixtures
 │   └── README.md            # Test documentation
 ├── scripts/                 # Executable pipeline scripts
@@ -63,17 +65,47 @@ bootstrap_genre_analysis/
 
 ### Module 3: Visualization (`src/visualization/`)
 **Responsibility**: Creating informative plots and figures
-- Bootstrap distribution plots
-- Confidence interval visualizations
-- Regional comparison plots
-- Difference distribution plots
-- Heatmaps and multi-panel figures
+- Bootstrap distribution plots with confidence intervals
+- Confidence interval visualizations for genre means
+- Regional comparison heatmaps
+- Difference distribution plots with zero reference line
+- All figures saved at 300 DPI for publication quality
 
 **Key Files**:
 - `plot_bootstrap.py`: Bootstrap distribution plots
+  - `plot_bootstrap_distribution()`: Histogram of bootstrap distribution with CI and observed statistic
+  - `plot_genre_means_by_region()`: Bar chart comparing genre means across regions
 - `plot_intervals.py`: CI visualization
+  - `plot_confidence_intervals()`: Error bar plot showing 95% CIs for genre means
 - `plot_regional.py`: Regional comparison plots
-- `plot_utils.py`: Shared plotting utilities
+  - `plot_regional_comparison()`: Heatmap showing genre performance across regions
+  - `plot_difference_distributions()`: Histogram of bootstrap differences with zero reference
+- `plot_utils.py`: Shared plotting utilities and style settings
+
+**Usage Example**:
+```python
+from src.visualization import (
+    plot_bootstrap_distribution,
+    plot_confidence_intervals,
+    plot_regional_comparison,
+    plot_difference_distributions
+)
+
+# Plot bootstrap distribution
+plot_bootstrap_distribution(
+    bootstrap_stats=bootstrap_means,
+    true_statistic=observed_mean,
+    ci_bounds=(ci_lower, ci_upper),
+    title="Bootstrap Distribution of Genre Mean",
+    save_path="results/figures/bootstrap_dist.png"
+)
+
+# Plot confidence intervals
+plot_confidence_intervals(
+    results=ci_dataframe,
+    save_path="results/figures/confidence_intervals.png"
+)
+```
 
 ### Module 4: Reporting (`src/reporting/`)
 **Responsibility**: Generating reports and summaries
@@ -89,12 +121,12 @@ bootstrap_genre_analysis/
 ### Work Assignment
 
 **Person 1 Responsibilities:**
-- ✅ Module 1: Data Preprocessing (CODE COMPLETE - ready for testing)
-- ✅ Module 3: Visualization (CODE COMPLETE - ready for use)
+- ✅ Module 1: Data Preprocessing (COMPLETE - tested and validated)
+- ✅ Module 3: Visualization (COMPLETE - tested and ready for use)
 - See `PERSON1_STATUS.md` for detailed task list
 
 **Person 2 Responsibilities:**
-- ⚠️ Module 2: Bootstrap Analysis (TEMPLATE PROVIDED - needs testing and implementation)
+- ✅ Module 2: Bootstrap Analysis (COMPLETE - integrated and tested)
 - ⚠️ Module 4: Reporting (TEMPLATE PROVIDED - needs completion)
 - See `PERSON2_STATUS.md` for detailed task list and TODO checklist
 
@@ -144,6 +176,8 @@ python -m pytest tests/ --cov=src --cov-report=html
 
 # Run specific test module
 python -m pytest tests/test_data_preprocessing.py
+python -m pytest tests/test_bootstrap_analysis.py
+python -m pytest tests/test_visualization.py
 ```
 
 **Note**: On Windows/PowerShell, use `python -m pytest` instead of `pytest` if the command is not recognized.
