@@ -127,8 +127,8 @@ plot_confidence_intervals(
 
 **Person 2 Responsibilities:**
 - ✅ Module 2: Bootstrap Analysis (COMPLETE - integrated and tested)
-- ⚠️ Module 4: Reporting (TEMPLATE PROVIDED - needs completion)
-- See `PERSON2_STATUS.md` for detailed task list and TODO checklist
+- ✅ Module 4: Reporting (COMPLETE - integrated and tested)
+- See `PERSON2_STATUS.md` for detailed task list
 
 ### Workflow
 1. **Data Preprocessing** (Person 1): Prepares clean, standardized datasets
@@ -157,11 +157,27 @@ pip install pandas numpy matplotlib seaborn scipy jupyter
 ### Setup
 1. Install dependencies: `pip install -r requirements.txt`
 2. Place raw data files in `data/raw/` (e.g., `vgsales.csv`)
-3. Run tests: `pytest tests/` (optional, but recommended)
-4. Run data preprocessing: `python scripts/run_preprocessing.py`
-5. Run bootstrap analysis: See `scripts/` for analysis scripts (Person 2)
-6. Generate visualizations: See `scripts/` for visualization scripts (Person 1)
-7. Compile report: See reporting module
+3. Run tests: `python -m pytest tests/` (optional, but recommended)
+
+### Running the Analysis Pipeline
+1. **Data Preprocessing**: `python scripts/run_preprocessing.py`
+   - Cleans and transforms data
+   - Saves to `data/processed/`
+
+2. **Bootstrap Analysis**: `python scripts/run_bootstrap_analysis.py`
+   - Runs bootstrap for all genre-region combinations (10,000 iterations)
+   - Calculates 95% confidence intervals
+   - Saves results to `results/tables/`
+
+3. **Generate Figures**: `python scripts/generate_figures.py`
+   - Creates all required visualizations
+   - Saves to `results/figures/` at 300 DPI
+
+4. **Jupyter Notebook**: Open `notebooks/bootstrap_analysis_workflow.ipynb`
+   - Complete end-to-end workflow
+   - Interactive analysis and visualization
+
+5. **Compile Report**: Use results from `results/tables/` and `results/figures/`
 
 ### Testing
 

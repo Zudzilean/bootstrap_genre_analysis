@@ -20,23 +20,36 @@
 - [x] Apply log transformations and reshape for each region
 - [x] Save cleaned data to `data/processed/` (e.g., `cleaned_data_global_1995-2016.csv`)
 
-### Phase 2: Wait for Person 2
-- [ ] Wait for bootstrap analysis results in `results/tables/`
+### Phase 2: Bootstrap Analysis ✅ COMPLETE
+- [x] Run bootstrap analysis for all genre-region combinations
+- [x] Run bootstrap for all genre pairs
+- [x] Calculate 95% confidence intervals and significance tests
+- [x] Save results to `results/tables/`
 
-### Phase 3: Visualization (After Person 2 completes)
-- [ ] Create all required figures using results from `results/tables/`
-- [ ] Save to `results/figures/` at 300 DPI
-- [ ] Verify all figures meet proposal requirements
+### Phase 3: Visualization ✅ COMPLETE
+- [x] Create all required figures using results from `results/tables/`
+- [x] Save to `results/figures/` at 300 DPI
+- [x] Generate bootstrap distribution plots
+- [x] Generate confidence interval plots
+- [x] Generate regional comparison heatmaps
+- [x] Generate difference distribution plots
 
-## 📝 Current Priority
+### Phase 4: Complete Workflow ✅ COMPLETE
+- [x] Create bootstrap analysis script (`scripts/run_bootstrap_analysis.py`)
+- [x] Create figure generation script (`scripts/generate_figures.py`)
+- [x] Create Jupyter Notebook for complete workflow
+- [x] All results and figures generated
 
-**Phase 1 Complete!** ✅
-- Data preprocessing pipeline successfully run
-- 5 cleaned data files saved to `data/processed/`
-- Selected genres: Action (3167), Role-Playing (1422), Simulation (835)
-- Time window: 1995-2016 (15,835 total rows → 5,424 after genre filtering)
+## 📝 Current Status
 
-**Next: Wait for Person 2** - Bootstrap analysis using cleaned data
+**All Phases Complete!** ✅
+- Data preprocessing: ✅ Complete
+- Bootstrap analysis: ✅ Complete (15 means + 15 differences)
+- Visualizations: ✅ Complete (multiple figures generated)
+- Jupyter Notebook: ✅ Created
+- Results saved to: `results/tables/` and `results/figures/`
+
+**Project Ready for Final Report Writing**
 
 ## 🔗 References
 
